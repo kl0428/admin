@@ -109,18 +109,18 @@ return array(
         ), */
         // uncomment the following to use a MySQL database
 
-        /*'db'=>array(
-            'connectionString' => 'mysql:host=192.168.10.32;port=3306;dbname=cgtz_review',
+        'db'=>array(
+            'connectionString' => 'mysql:host=localhost;port=3306;dbname=urtimer',
             'emulatePrepare' => true,
-            'username' => 'admin',
-            'password' => 'cgtz2014',
+            'username' => 'root',
+            'password' => 'urtimerqwerty',
             'charset' => 'utf8',
             'tablePrefix' => 't_',
             'schemaCacheID' => 'cache_file',
             'schemaCachingDuration' => 0,
             'enableParamLogging' => true,
         ),
-        'op_slaver' => array(
+        /*'op_slaver' => array(
             'connectionString' => 'mysql:host=192.168.10.32;port=3309;dbname=cgtz_review',
             'emulatePrepare' => true,
             'username' => 'admin',
@@ -154,7 +154,7 @@ return array(
             'schemaCacheID' => 'cache_file',
             'schemaCachingDuration' => 0,
             'enableParamLogging' => true,
-        ],
+        ],*/
         'cache_file' => array(
             'class' => 'CFileCache',
         ),
@@ -166,14 +166,14 @@ return array(
             //'serializer'=>false,
             'servers' => array(
                 array(
-                    'host' => '192.168.10.106',
+                    'host' => '127.0.0.1',
                     'port' => 6379,
-                    'password' => '00000000',
+                   // 'password' => '00000000',
                 ),
             ),
         ),
 
-        'cache3' => array(
+        /*'cache3' => array(
             'class' => 'ext.redis.CRedisCache',
             'keyPrefix' => false,
             'hashKey' => false,
