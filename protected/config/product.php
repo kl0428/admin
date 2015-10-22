@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name' => '草根投资网站运营管理系统',
+    'name' => '优时',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
     'theme' => 'classic',

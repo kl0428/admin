@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="text-right collapse-button" style="padding:7px 9px;">
-            <span>草根人事管理平台v1.0</span>
+            <span>优时管理平台v1.0</span>
             <button id="sidebar-collapse" class="btn btn-default" style=""><i style="color:#fff;" class="fa fa-angle-left"></i></button>
         </div>
 </div>

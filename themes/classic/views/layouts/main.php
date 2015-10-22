@@ -39,7 +39,7 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="fa fa-gear"></span>
 			</button>
-			<a class="navbar-brand" href="#"><span>人事考核平台</span></a>
+			<a class="navbar-brand" href="#"><span>优时后台管理平台</span></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<?php if(!Yii::app()->user->isGuest):?>
