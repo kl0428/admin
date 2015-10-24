@@ -43,24 +43,6 @@ return array(
 //            'newFileMode' => 0666,
 //            'newDirMode' => 0777,
         ),
-        /*'rights' => array(
-            'superuserName' => 'admin', // Name of the role with super user privileges.
-            'authenticatedName' => 'Authenticated', // Name of the authenticated user role.
-            'userClass' => 'SysUser',
-            'userIdColumn' => 'id', // Name of the user id column in the database.
-            'userNameColumn' => 'login_name', // Name of the user name column in the database.
-            'enableBizRule' => true, // Whether to enable authorization item business rules.
-            'enableBizRuleData' => true, // Whether to enable data for business rules.
-            'displayDescription' => true, // Whether to use item description instead of name.
-            'flashSuccessKey' => 'RightsSuccess', // Key to use for setting success flash messages.
-            'flashErrorKey' => 'RightsError', // Key to use for setting error flash messages.
-            'install' => false, // Whether to install rights.
-            'baseUrl' => '/rights', // Base URL for Rights. Change if module is nested.
-            'layout' => 'rights.views.layouts.main', // Layout to use for displaying Rights.
-            'appLayout' => 'application.views.layouts.main', // Application layout.
-            'cssFile' => 'rights.css', // Style sheet file to use for Rights.
-            'debug' => true,
-        ),*/
 
     ),
 
@@ -138,7 +120,7 @@ return array(
                 ),
             ),
         ),
-        
+
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
