@@ -194,7 +194,7 @@ class BusinessPager extends CLinkPager {
 		if(strpos($URI,'?')) {
 			$tempArr = explode("?", $URI);
 			parse_str($tempArr[1], $result);
-			unset($result['Debt_page']);
+			unset($result['Managers_page']);
 			unset($result['Project_page']);
 			$URI = "/".$this->getController()->route."?".http_build_query($result);
 		}
@@ -209,10 +209,10 @@ class BusinessPager extends CLinkPager {
 
 		$params=$_GET;
 		if($page>0) { // page 0 is the default
-			$params['Debt_page'] = $page + 1;
+			$params['Managers_page'] = $page + 1;
 			$params['Project_page'] = $page + 1;
 		}else {
-			unset($params['Debt_page']);
+			unset($params['Managers_page']);
 			unset($params['Project_page']);
 		}
 		return "/".$this->getController()->route."?".http_build_query($params);

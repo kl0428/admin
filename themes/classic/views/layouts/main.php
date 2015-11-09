@@ -50,7 +50,7 @@
 							<span><?php echo Yii::app()->user->name?></span> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
-								<?php echo CHtml::link("修改资料",array("/SysUser/profile","id"=>Yii::app()->user->getId()));?>
+								<?php echo CHtml::link("修改资料",array("/manager/change","id"=>Yii::app()->user->getId()));?>
 							</li>
 							<li class="divider"></li>
 							<li>
