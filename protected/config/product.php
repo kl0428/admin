@@ -67,19 +67,19 @@ return array(
             'class' => 'CFileCache',
         ),*/
 
-        'cache' => array(
-            'class' => 'ext.redis.CRedisCache',
-            //'keyPrefix' => false,
-           // 'hashKey' => false,
-            //'serializer'=>false,
-            'servers' => array(
-                array(
-                    'host' => '127.0.0.1',
-                    'port' => 6379,
-                    //'password' => 'urtimerqwerty',
-                ),
-            ),
-        ),
+//        'cache' => array(
+//            'class' => 'ext.redis.CRedisCache',
+//            //'keyPrefix' => false,
+//           // 'hashKey' => false,
+//            //'serializer'=>false,
+//            'servers' => array(
+//                array(
+//                    'host' => '127.0.0.1',
+//                    'port' => 6379,
+//                    //'password' => 'urtimerqwerty',
+//                ),
+//            ),
+//        ),
 
         'errorHandler'=>array(
             // use 'site/error' action to display errors
