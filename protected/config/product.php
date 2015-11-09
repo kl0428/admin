@@ -69,14 +69,14 @@ return array(
 
         'cache' => array(
             'class' => 'ext.redis.CRedisCache',
-            'keyPrefix' => false,
-            'hashKey' => false,
+            //'keyPrefix' => false,
+           // 'hashKey' => false,
             //'serializer'=>false,
             'servers' => array(
                 array(
                     'host' => '127.0.0.1',
                     'port' => 6379,
-                    'password' => '00000000',
+                    //'password' => 'urtimerqwerty',
                 ),
             ),
         ),
