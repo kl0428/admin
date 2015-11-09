@@ -63,9 +63,9 @@ return array(
             'charset' => 'utf8',
             'tablePrefix' => 't_',
         ),
-        /*'cache_file' => array(
+        'cache_file' => array(
             'class' => 'CFileCache',
-        ),*/
+        ),
 
 //        'cache' => array(
 //            'class' => 'ext.redis.CRedisCache',

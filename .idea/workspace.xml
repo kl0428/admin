@@ -111,7 +111,7 @@
         <entry file="file://$PROJECT_DIR$/protected/config/product.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.3321918" vertical-offset="744" max-vertical-offset="1785">
-              <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
+              <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -741,7 +741,7 @@
     <entry file="file://$PROJECT_DIR$/protected/config/product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321918" vertical-offset="744" max-vertical-offset="1785">
-          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
+          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
           <folding />
         </state>
       </provider>
