@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e02654fa-2fc6-4d24-b5de-d959903ad85e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/ChangeForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/controllers/ManagerController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/manager/change.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/manager/create.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/manager/index.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/protected/models/User.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/BaseController.php" afterPath="$PROJECT_DIR$/protected/components/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/BusinessPager.php" afterPath="$PROJECT_DIR$/protected/components/BusinessPager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/UserIdentity.php" afterPath="$PROJECT_DIR$/protected/components/UserIdentity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/develop.php" afterPath="$PROJECT_DIR$/protected/config/develop.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/classic/views/layouts/main.php" afterPath="$PROJECT_DIR$/themes/classic/views/layouts/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/views/slide_menu.php" afterPath="$PROJECT_DIR$/protected/components/views/slide_menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e02654fa-2fc6-4d24-b5de-d959903ad85e" name="Default" comment="" />
     <ignored path="admin.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
