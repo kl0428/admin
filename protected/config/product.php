@@ -70,16 +70,16 @@ return array(
 
         'cache' => array(
             'class' => 'ext.redis.CRedisCache',
-            //'keyPrefix' => false,
-           // 'hashKey' => false,
+            'keyPrefix' => false,
+            'hashKey' => false,
             //'serializer'=>false,
-            /*'servers' => array(
+            'servers' => array(
                 array(
                     'host' => '127.0.0.1',
                     'port' => 6379,
-                    //'password' => 'urtimerqwerty',
+                    'password' => '123456',
                 ),
-            ),*/
+            ),
         ),
 
         'errorHandler'=>array(
