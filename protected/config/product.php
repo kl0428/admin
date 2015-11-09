@@ -63,6 +63,23 @@ return array(
             'charset' => 'utf8',
             'tablePrefix' => 't_',
         ),
+        'cache_file' => array(
+            'class' => 'CFileCache',
+        ),
+
+        'cache' => array(
+            'class' => 'ext.redis.CRedisCache',
+            'keyPrefix' => false,
+            'hashKey' => false,
+            //'serializer'=>false,
+            'servers' => array(
+                array(
+                    'host' => '127.0.0.1',
+                    'port' => 6379,
+                    // 'password' => '00000000',
+                ),
+            ),
+        ),
 
         'errorHandler'=>array(
             // use 'site/error' action to display errors
