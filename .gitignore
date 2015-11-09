@@ -1,0 +1,15 @@
+*.bin
+.idea/
+*.swp
+*.php~
+*.bak
+.settings/
+.project
+.buildpath
+protected/runtime/
+index-test.php
+*.log
+assets/
+.htaccess
+.tags
+.tags_sorted_by_file

@@ -1,30 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "{{user}}".
+ * This is the model class for table "{{managers}}".
  *
- * The followings are the available columns in table '{{user}}':
+ * The followings are the available columns in table '{{managers}}':
  * @property integer $id
- * @property string $nickname
- * @property string $username
+ * @property string $name
+ * @property string $password
  * @property string $mobile
  * @property string $email
- * @property integer $sex
- * @property string $image
- * @property string $province
- * @property string $city
+ * @property string $authority
+ * @property string $is_quit
  * @property string $gmt_created
  * @property string $gmt_modified
- * @property string $password
  */
-class User extends CActiveRecord
+class Managers extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{user}}';
+		return '{{managers}}';
 	}
 
 	/**
@@ -35,16 +32,17 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nickname, password', 'required'),
-			array('sex', 'numerical', 'integerOnly'=>true),
-			array('nickname, username, email, password', 'length', 'max'=>32),
+			array('name, mobile, email', 'required','message'=>'必填'),
+			array('name','unique','className'=>'Managers','attributeName'=>'name','message'=>'用户名已存在'),
+			array('mobile','unique','className'=>'Managers','attributeName'=>'mobile','message'=>'手机号码已经存在'),
+			array('name, password, email', 'length', 'max'=>32),
 			array('mobile', 'length', 'max'=>11),
-			array('image', 'length', 'max'=>64),
-			array('province, city', 'length', 'max'=>6),
+			array('email','email','message'=>'请填写正确的邮箱'),
+			array('authority, is_quit', 'length', 'max'=>1),
 			array('gmt_created, gmt_modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nickname, username, mobile, email, sex, image, province, city, gmt_created, gmt_modified, password', 'safe', 'on'=>'search'),
+			array('id, name, password, mobile, email, authority, is_quit, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,18 +63,15 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => '用户id',
-			'nickname' => '登录名',
-			'username' => '姓名',
-			'mobile' => '手机号码',
+			'id' => '编号',
+			'name' => '用户名',
+			'password' => '密码',
+			'mobile' => '手机',
 			'email' => '邮箱',
-			'sex' => '性别', //0-女 1-男
-			'image' => '头像',
-			'province' => '省',
-			'city' => '市',
+			'authority' => '权限',
+			'is_quit' => '是否退出',
 			'gmt_created' => '创建时间',
 			'gmt_modified' => '更新时间',
-			'password' => '密码',
 		);
 	}
 
@@ -99,17 +94,14 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('nickname',$this->nickname,true);
-		$criteria->compare('username',$this->username,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('password',$this->password,true);
 		$criteria->compare('mobile',$this->mobile,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('sex',$this->sex);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('province',$this->province,true);
-		$criteria->compare('city',$this->city,true);
+		$criteria->compare('authority',$this->authority,true);
+		$criteria->compare('is_quit',$this->is_quit,true);
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
-		$criteria->compare('password',$this->password,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -120,10 +112,67 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Managers the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+
+
+	/*获取用户信息*/
+	public function loadStaffModel($id)
+	{
+		$res = '';
+		if(intval($id)) {
+			$model = $this->find(array('select' => array('name'), 'condition' => 'id=:id', 'params' => array(':id' => $id)));
+			if($model){
+				$res = $model->name;
+			}
+		}
+		return $res;
+	}
+	public function loadStaffAllModel()
+	{
+		$res = array();
+		$model = (array)$this->findAll(array('select'=>array('id','name'),'order'=>'name asc'));
+		if($model){
+			foreach($model as $key=>$value)
+			{
+				$res[$value->id] = $value->name;
+			}
+		}
+		return $res;
+	}
+
+	public function beforeSave()
+	{
+		if($this->isNewRecord)
+		{
+			$this->gmt_created = date('Y-m-d H:i:s');
+		}
+		$this->gmt_modified = date('Y-m-d H:i:s');
+		return true;
+	}
+
+	public function getAuthority()
+	{
+		$authority = $this->authority;
+			switch($authority){
+				case 0:
+					$res = '普通';
+					break;
+				case 1:
+					$res = '管理员';
+					break;
+				case 2:
+					$res = '超级管理员';
+					break;
+				default:
+					$res = '普通';
+					break;
+			}
+		return $res;
+	}
+
 }

@@ -19,8 +19,8 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$result = User::model()->find('username=? and status=?',array(
-			$this->username,"in"));
+		$result = Managers::model()->find('name=? and is_quit=?',array(
+			$this->username,"0"));
 		if ($result )
 		{
 			if($result->password==md5($this->username.md5($this->password)))
@@ -28,7 +28,7 @@ class UserIdentity extends CUserIdentity
 				$this->_id = $result->id;
 				$this->errorCode = self::ERROR_NONE;
 				$token = md5($result->id.$this->password);
-				Yii::app()->cache_redis->set($result->id.'.UserToken',$token);
+				//Yii::app()->cache_redis->set($result->id.'.UserToken',$token);
 				Yii::app()->user->setState('token',$token);
 				Yii::app()->user->setState('info',$result);
 			}else{

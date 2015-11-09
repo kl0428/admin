@@ -8,6 +8,7 @@
 	                     $conName =  strtolower($this->controller->getId());
 	                     $actName =  strtolower($this->controller->getAction()->getId());
 	                     $tmp = strtolower($this->controller->route);
+                         $info = Yii::app()->user->getState('info');
 	            ?>
                 <ul class="cl-vnavigation">
 
@@ -55,13 +56,13 @@
                                 <li class="<?php /*echo $conName=='newredpacket'?'active':'';*/?>"><?php /*echo CHtml::link("新红包模板",array("/NewRedPacket/index"));*/?></li>
                             </ul>-->
                         </li>
-
-                        <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>
-                            <ul class="sub-menu">
-                                <li class="<?php echo $tmp=='staff/index'?'active':'';?>"><?php echo CHtml::link("人员管理",array("/staff/index"));?></li>
-                                <li class="<?php echo $tmp=='unit/index'?'active':'';?>"><?php echo CHtml::link("部门管理",array("/unit/index"));?></li>
-                            </ul>
-                        </li>
+                        <?php if($info->authority >= 1):?>
+                            <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>
+                                <ul class="sub-menu">
+                                    <li class="<?php echo $tmp=='manager/index'?'active':'';?>"><?php echo CHtml::link("人员管理",array("/manager/index"));?></li>
+                                </ul>
+                            </li>
+                        <?php endif;?>
                 </ul>
             </div>
         </div>

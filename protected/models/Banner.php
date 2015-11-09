@@ -1,30 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "{{user}}".
+ * This is the model class for table "{{banner}}".
  *
- * The followings are the available columns in table '{{user}}':
+ * The followings are the available columns in table '{{banner}}':
  * @property integer $id
- * @property string $nickname
- * @property string $username
- * @property string $mobile
- * @property string $email
- * @property integer $sex
+ * @property string $name
  * @property string $image
- * @property string $province
- * @property string $city
+ * @property integer $start_time
+ * @property integer $end_time
+ * @property string $soft_del
+ * @property integer $sort
  * @property string $gmt_created
  * @property string $gmt_modified
- * @property string $password
  */
-class User extends CActiveRecord
+class Banner extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{user}}';
+		return '{{banner}}';
 	}
 
 	/**
@@ -35,16 +32,15 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nickname, password', 'required'),
-			array('sex', 'numerical', 'integerOnly'=>true),
-			array('nickname, username, email, password', 'length', 'max'=>32),
-			array('mobile', 'length', 'max'=>11),
-			array('image', 'length', 'max'=>64),
-			array('province, city', 'length', 'max'=>6),
+			array('name, image, sort', 'required'),
+			array('start_time, end_time, sort', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>32),
+			array('image', 'length', 'max'=>56),
+			array('soft_del', 'length', 'max'=>1),
 			array('gmt_created, gmt_modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nickname, username, mobile, email, sex, image, province, city, gmt_created, gmt_modified, password', 'safe', 'on'=>'search'),
+			array('id, name, image, start_time, end_time, soft_del, sort, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,18 +61,15 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => '用户id',
-			'nickname' => '登录名',
-			'username' => '姓名',
-			'mobile' => '手机号码',
-			'email' => '邮箱',
-			'sex' => '性别', //0-女 1-男
-			'image' => '头像',
-			'province' => '省',
-			'city' => '市',
+			'id' => '发现banner_id',
+			'name' => 'banner称呼',
+			'image' => 'banner',
+			'start_time' => 'Start Time',
+			'end_time' => 'End Time',
+			'soft_del' => '是否删除',//0-未删除,1-删除
+			'sort' => '排序大前',
 			'gmt_created' => '创建时间',
 			'gmt_modified' => '更新时间',
-			'password' => '密码',
 		);
 	}
 
@@ -99,17 +92,14 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('nickname',$this->nickname,true);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('mobile',$this->mobile,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('sex',$this->sex);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('image',$this->image,true);
-		$criteria->compare('province',$this->province,true);
-		$criteria->compare('city',$this->city,true);
+		$criteria->compare('start_time',$this->start_time);
+		$criteria->compare('end_time',$this->end_time);
+		$criteria->compare('soft_del',$this->soft_del,true);
+		$criteria->compare('sort',$this->sort);
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
-		$criteria->compare('password',$this->password,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -120,7 +110,7 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Banner the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

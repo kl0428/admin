@@ -70,4 +70,14 @@ class BaseController extends Controller
         }
         return $newData;
     }
+
+    /**
+     * @return array 过滤器列表，会顺序执行
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+        );
+    }
 }
