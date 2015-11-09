@@ -20,13 +20,6 @@ return array(
         'application.models.*',
         'application.components.*',
         'application.behaviors.*',
-        //'application.modules.rights.*',
-        //'application.modules.rights.components.*', // Correct paths if necessary.
-        'application.extensions.MongoYii.*',
-        'application.extensions.MongoYii.validators.*',
-        'application.extensions.MongoYii.behaviors.*',
-        'application.extensions.MongoYii.util.*',
-        'application.extensions.EMongoDbLogRoute.*',
         'application.extensions.phpqrcode.*',
     ),
 
@@ -66,41 +59,18 @@ return array(
             ),
         ),
 
-        'JpushMessage' => array(
-            'class' => 'application.vendor.JpushComponent',
-            'appKey' => '597c87047522b92d2f7f42c2',
-            'masterSecret' => '749605caded14e2e53323b59',
-            'environment' => false,  //false 表示开发环境　　　true表示生产环境
-        ),
-
-        'aes256' => array(
-            'class' => 'ext.encrypt.Aes256',
-            'privatekey_32bits_hexadecimal' => 'Ibs09foGZqwr2k3SNHa1PMhjUBODFc8mzLCvTAWXYuJepg7QiRnVy45Ktx6dlE',
-        ),
-        'cryptaes' => array(
-            'class' => 'ext.encrypt.CryptAes',
-            'secret_key' => 'cgtz',
-        ),
-        'cry' => array(
-            'class' => 'CSecurityManager',
-            'encryptionKey' => 'cgtz',
-//            'cryptAlgorithm'=>'ecb',
-        ),
         /* 'db'=>array(
             'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
         ), */
         // uncomment the following to use a MySQL database
 
         'db'=>array(
-            'connectionString' => 'mysql:host=localhost;port=3306;dbname=urtimer',
+            'connectionString' => 'mysql:host=127.0.0.1;port=3306;dbname=urtimer',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => 'urtimerqwerty',
             'charset' => 'utf8',
             'tablePrefix' => 't_',
-            'schemaCacheID' => 'cache_file',
-            'schemaCachingDuration' => 0,
-            'enableParamLogging' => true,
         ),
 
         'cache_file' => array(
@@ -141,13 +111,7 @@ return array(
                     ),
                     'logFile' => 'db.log',
                 ),
-                array(
-                    'class' => 'CFileLogRoute',
-                    'enabled' => true,
-                    'levels' => 'error,warning,info',
-                    'categories' => 'datasync',
-                    'logFile' => 'datasync.log',
-                ),
+
                 array(
                     'class' => 'CFileLogRoute',
                     'enabled' => true,
@@ -165,38 +129,7 @@ return array(
                     'levels' => 'trace,error,warning',
                     'showInFireBug' => true,
                 ),
-                array(
-                    'class'=>'CFileLogRoute',
-                    'enabled'=>true,
-                    'levels'=>'error,warning,info',
-                    'categories'=>'datasync',
-                    'logFile'=>'datasync.log',
-                ),
-                array(
-                    'class'=>'CFileLogRoute',
-                    'enabled'=>true,
-                    'levels'=>'error,warning,info',
-                    'categories'=>'application.project.initBalance',
-                    'logFile'=>'initBalance.log',
-                ),
-                array(
-                    'class'=>'CFileLogRoute',
-                    'enabled'=>true,
-                    'levels'=>'error,warning,info',
-                    'categories'=>'create_zhi_tou',
-                    'logFile'=>'zhi_tou.log',
-                ),
-
-                array(
-                    'class'=>'CFileLogRoute',
-                    'enabled'=>true,
-                    'levels'=>'error,warning',
-                    'filter'=>array(
-                        'class'=>'CLogFilter',
-                        'logUser'=>true,
-                        'prefixUser'=>true,
-                    ),
-                ),
+                
 //                array(
 //                    'class'=>'CWebLogRoute',
 //                    'enabled'=>true,
@@ -204,16 +137,6 @@ return array(
 //                    'levels'=>'info',
 //                    'showInFireBug'=>false,
 //                ),
-                array(
-                    'class' => 'EMongoLogRoute',
-                    'connectionId' => 'mongodb', // optional, defaults to 'mongodb'
-                    // 'logCollectionName'=>'applactionlog',
-                    'enabled' => true,
-                    'categories' => 'usercont,jpush,jsonError',
-                    'levels' => 'info,error,warning',
-                    // 'dbName' => 'test',
-                    // 'collectionName' => 'yiilog',
-                ),
                 // uncomment the following to show log messages on web pages
 
                 /* array(
@@ -230,23 +153,6 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail'=>'webmaster@example.com',
-        'back_host2' => 'http://192.168.10.188:10003/',
-        'back_host' => 'http://192.168.10.188:9103/cgtz-rest3/rest/',
-        'citys' => array(
-            "other"=>"其他地区",
-            "hz"=>"杭州",
-            "jh"=>"金华",
-            "yw"=>"义乌"
-        ),
-        'cjflx'=>array(
-            "0"=>"自由放贷人",
-            "1"=>"小额贷款公司",
-            "2"=>"其他",
-        ),
-        'jkrlx'=>array(
-            "0"=>"个人",
-            "1"=>"企业",
-        ),
         'up_path' => '/data/uploadfiles',
         'up_domain' => 'http://img.op.admin.cgtz.com',
         'project_preview_url'=>'http://sun.dev.cgtz.com/',
