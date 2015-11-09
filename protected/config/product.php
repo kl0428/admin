@@ -19,8 +19,6 @@ return array(
     'import'=>array(
         'application.models.*',
         'application.components.*',
-        'application.behaviors.*',
-        'application.extensions.phpqrcode.*',
     ),
 
     // => array('MyEventHandler', 'BeginRequestMethod'),
@@ -64,14 +62,14 @@ return array(
         ), */
         // uncomment the following to use a MySQL database
 
-        'db'=>array(
+        /*'db'=>array(
             'connectionString' => 'mysql:host=127.0.0.1;port=3306;dbname=urtimer',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => 'urtimerqwerty',
             'charset' => 'utf8',
             'tablePrefix' => 't_',
-        ),
+        ),*/
 
         'cache_file' => array(
             'class' => 'CFileCache',
@@ -129,20 +127,6 @@ return array(
                     'levels' => 'trace,error,warning',
                     'showInFireBug' => true,
                 ),
-                
-//                array(
-//                    'class'=>'CWebLogRoute',
-//                    'enabled'=>true,
-//                    'categories'=>'usercont',
-//                    'levels'=>'info',
-//                    'showInFireBug'=>false,
-//                ),
-                // uncomment the following to show log messages on web pages
-
-                /* array(
-                    'class'=>'CWebLogRoute',
-                    'levels'=>'trace',
-                ), */
 
             ),
         ),
