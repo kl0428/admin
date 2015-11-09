@@ -74,7 +74,7 @@ return array(
             //'serializer'=>false,
             'servers' => array(
                 array(
-                    'host' => '127.0.0.1',
+                    'host' => '120.25.59.222',
                     'port' => 6379,
                     // 'password' => '00000000',
                 ),
