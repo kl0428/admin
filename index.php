@@ -2,7 +2,7 @@
 define('VERSION', time());
 //defined('ENVIRONMENT') or define('ENVIRONMENT','PRODUCT');
 //defined('ENVIRONMENT') or define('ENVIRONMENT','TEST');
-defined('ENVIRONMENT') or define('ENVIRONMENT', 'PRODUCT');
+defined('ENVIRONMENT') or define('ENVIRONMENT', 'DEVELOP');
 //develop 开发  test测试  product线上
 
 if (ENVIRONMENT === 'DEVELOP') {
