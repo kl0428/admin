@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'优时',
+    'name'=>'草根',
     //'defaultController'=>'index',
     'theme' => 'classic',
 

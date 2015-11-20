@@ -46,17 +46,18 @@
                             </ul>-->
                         </li>
 
-                        <li><a href="#"><i class="fa fa-smile-o"></i><span>统计</span></a>
-                            <!--<ul class="sub-menu">
-                                <li class="<?php /*echo $tmp=='operatecode/index'?'active':'';*/?>"><?php /*echo CHtml::link("跟踪代码设置",array("/OperateCode/index"));*/?></li>
-                                <li class="<?php /*echo $tmp=='operatecode/create'?'active':'';*/?>"><?php /*echo CHtml::link("添加跟踪代码",array("/OperateCode/create"));*/?></li>
-                                <li class="<?php /*echo $conName=='operatechannel'?'active':'';*/?>"><?php /*echo CHtml::link("推广渠道",array("/OperateChannel/index"));*/?></li>
-                                <li class="<?php /*echo $conName=='coupontemplate'?'active':'';*/?>"><?php /*echo CHtml::link("投资券模板",array("/couponTemplate/index"));*/?></li>
-                                <li class="<?php /*echo $conName=='yearcoupon'?'active':'';*/?>"><?php /*echo CHtml::link("年化券",array("/yearCoupon/index"));*/?></li>
-                                <li class="<?php /*echo $conName=='newredpacket'?'active':'';*/?>"><?php /*echo CHtml::link("新红包模板",array("/NewRedPacket/index"));*/?></li>
-                            </ul>-->
-                        </li>
+
                         <?php if($info->authority >= 1):?>
+                            <li><a href="#"><i class="fa fa-smile-o"></i><span>应用管理</span></a>
+                                <ul class="sub-menu">
+                                    <li class="<?php echo $tmp=='user/index'?'active':'';?>"><?php echo CHtml::link("用户管理",array("/user/index"));?></li>
+                                    <li class="<?php echo $tmp=='operatecode/create'?'active':'';?>"><?php echo CHtml::link("添加跟踪代码",array("/OperateCode/create"));?></li>
+                                    <li class="<?php echo $conName=='operatechannel'?'active':'';?>"><?php echo CHtml::link("推广渠道",array("/OperateChannel/index"));?></li>
+                                    <li class="<?php echo $conName=='coupontemplate'?'active':'';?>"><?php echo CHtml::link("投资券模板",array("/couponTemplate/index"));?></li>
+                                    <li class="<?php echo $conName=='yearcoupon'?'active':'';?>"><?php echo CHtml::link("年化券",array("/yearCoupon/index"));?></li>
+                                    <li class="<?php echo $conName=='newredpacket'?'active':'';?>"><?php echo CHtml::link("新红包模板",array("/NewRedPacket/index"));?></li>
+                                </ul>
+                            </li>
                             <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>
                                 <ul class="sub-menu">
                                     <li class="<?php echo $tmp=='manager/index'?'active':'';?>"><?php echo CHtml::link("人员管理",array("/manager/index"));?></li>
