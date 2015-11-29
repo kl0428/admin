@@ -96,6 +96,11 @@ return array(
                     'class'=>'CFileLogRoute',
                     'levels'=>'error, warning',
                 ),
+               /* array(
+                    'class'=>'CWebLogRoute',//这表示把日志显示在网页下方，下方有详细的
+                    'levels'=>'trace, info, error, warning',
+                    'categories'=>'test.*,system.db.*',
+                ),*/
                 // uncomment the following to show log messages on web pages
                 /*
                 array(
@@ -127,5 +132,36 @@ return array(
             0=>array('key'=>0,'name'=>'体验通卡'),
             1=>array('key'=>1,'name'=>'通卡'),
         ),
+        'imageUrl'=>'http://admin.cgtz.com',
+        'UpYun' => array(
+            'visitUrl' => 'https://cgtzimage.b0.upaiyun.com',//images
+            'httpImgUrl' => 'http://cgtzimage.b0.upaiyun.com',//images
+            'cutUrl' => 'http://v0.api.upyun.com',
+            'bucketname' => 'cgtzimage',
+            'username' => 'caogen',
+            'password' => 'caogen123',
+            'bucket_file_name' => 'cgtzfiles',
+            'attachUrl' => 'http://cgtzfiles.b0.upaiyun.com',//files
+            'projectsUrl' => 'https://cgtzimage.b0.upaiyun.com/projectTests/',//images
+        ),
+        'banklist' => array(
+            'CMB' => '招商银行',
+            'ICBC' => '中国工商银行',//ICBC-D
+            'CCB' => '中国建设银行',
+            'BOC' => '中国银行',
+            'ABC' => '中国农业银行',//ABC-D
+            'HSBC' => '交通银行',
+            'SPDB' => '浦发银行',
+            'GDB'=>'广东发展银行',
+            'CITIC' => '中信银行',//CITIC-D
+            'CEB' => '中国光大银行',
+            'CIB'=>'兴业银行',
+            'CMBC' => '中国民生银行',
+            'HXB' => '华夏银行',
+            'SDB' => '平安银行',
+            'PSBC' => '中国邮政储蓄银行',
+            'HZBANK' => '杭州银行',
+        ),
     ),
 );
+

@@ -39,7 +39,7 @@ class Managers extends CActiveRecord
 			array('mobile', 'length', 'max'=>11),
 			array('email','email','message'=>'请填写正确的邮箱'),
 			array('authority, is_quit', 'length', 'max'=>1),
-			array('gmt_created, gmt_modified', 'safe'),
+			array('gmt_created, gmt_modified , store', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, password, mobile, email, authority, is_quit, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
@@ -68,6 +68,7 @@ class Managers extends CActiveRecord
 			'password' => '密码',
 			'mobile' => '手机',
 			'email' => '邮箱',
+			'store' =>'店铺',
 			'authority' => '权限',
 			'is_quit' => '是否退出',
 			'gmt_created' => '创建时间',

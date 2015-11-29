@@ -52,10 +52,10 @@
                                 <ul class="sub-menu">
                                     <li class="<?php echo $tmp=='user/index'?'active':'';?>"><?php echo CHtml::link("用户管理",array("/user/index"));?></li>
                                     <li class="<?php echo $tmp=='report/index'?'active':'';?>"><?php echo CHtml::link("举报反馈",array("/report/index"));?></li>
-                                    <li class="<?php echo $conName=='operatechannel'?'active':'';?>"><?php echo CHtml::link("推广渠道",array("/OperateChannel/index"));?></li>
-                                    <li class="<?php echo $conName=='coupontemplate'?'active':'';?>"><?php echo CHtml::link("投资券模板",array("/couponTemplate/index"));?></li>
-                                    <li class="<?php echo $conName=='yearcoupon'?'active':'';?>"><?php echo CHtml::link("年化券",array("/yearCoupon/index"));?></li>
-                                    <li class="<?php echo $conName=='newredpacket'?'active':'';?>"><?php echo CHtml::link("新红包模板",array("/NewRedPacket/index"));?></li>
+                                    <li class="<?php echo $tmp=='stroe/view'?'active':'';?>"><?php echo CHtml::link("商铺列表",array("/store/view"));?></li>
+                                    <li class="<?php echo $tmp=='coupontemplate'?'active':'';?>"><?php echo CHtml::link("投资券模板",array("/couponTemplate/index"));?></li>
+                                    <li class="<?php echo $tmp=='yearcoupon'?'active':'';?>"><?php echo CHtml::link("年化券",array("/yearCoupon/index"));?></li>
+                                    <li class="<?php echo $tmp=='newredpacket'?'active':'';?>"><?php echo CHtml::link("新红包模板",array("/NewRedPacket/index"));?></li>
                                 </ul>
                             </li>
                             <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>

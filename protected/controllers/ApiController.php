@@ -27,4 +27,25 @@ class ApiController extends BaseController
             }
         }
     }
+
+    public function actionUploadFiles()
+    {
+        $config = array(
+            "savePath" => "upload/" , //保存路径
+            "maxSize" => 5000, //单位KB
+            "allowFiles" => array(".gif", ".png", ".jpg", ".jpeg", ".bmp"),
+            "userId"=>Yii::app()->user->getId(),
+        );
+        $up = new Uploader( "upFile" , $config );
+        Yii::log(json_encode($up),'test','test.pd');
+        $info = $up->getFileInfo();
+        $data = array(
+            'url'=>$info['url'],
+            'fileType'=>$info['type'],
+            'original'=>$info['originalName'],
+            'state'=>$info['state']
+        );
+        echo CJSON::encode($data);
+        Yii::app()->end();
+    }
 }

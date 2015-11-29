@@ -38,12 +38,14 @@ class Store extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, image, address, tel, realname, identity, mobile, bussiness_license, bankcode, banktype', 'required'),
+			array('name, image, address, tel, realname, identity, mobile, bussiness_license, bankcode, banktype', 'required','message'=>'此项要求必填'),
 			array('name, tel, realname, identity, mobile, bankcode, banktype', 'length', 'max'=>32),
 			array('image', 'length', 'max'=>64),
+			array('tel','match','pattern'=>'/^((\+?[0-9]{2,4}\-[0-9]{3,4}\-)|([0-9]{3,4}\-))?([0-9]{7,8})(\-[0-9]+)?$/','message'=>'输入正确的固定电话'),
+			array('mobile','match','pattern'=>'/^1([0-9]{9})/','message'=>'请输入正确的手机号码'),
 			array('address, bussiness_license', 'length', 'max'=>250),
 			array('is_open', 'length', 'max'=>1),
-			array('introduction, gmt_created, gmt_modified', 'safe'),
+			array('introduction,images_str,gmt_created, gmt_modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, image, address, tel, realname, identity, mobile, bussiness_license, bankcode, banktype, is_open, introduction, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
@@ -78,8 +80,9 @@ class Store extends CActiveRecord
 			'bussiness_license' => '营业执照',
 			'bankcode' => '银行卡号',
 			'banktype' => '银行类型',
-			'is_open' => '审核通过',
+			'is_open' => '审核通过',//0-未审核,1审核通过,2-退出,3-删除
 			'introduction' => '介绍',
+			'images_str'=>'介绍图片',
 			'gmt_created' => '创建时间',
 			'gmt_modified' => '修改时间',
 		);
@@ -118,6 +121,7 @@ class Store extends CActiveRecord
 		$criteria->compare('introduction',$this->introduction,true);
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
+		$criteria->order = 'gmt_created desc';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -133,5 +137,54 @@ class Store extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function beforeSave()
+	{
+		if($this->isNewRecord)
+		{
+			$this->gmt_created = date('Y-m-d H:i:s');
+		}
+		$this->gmt_modified = date('Y-m-d H:i:s');
+		return true;
+	}
+
+	public function getName()
+	{
+		$data = $this->findAll(array('select'=>array('id','name')));
+		$names = array();
+		if($data)
+		{
+			foreach($data as $key=>$val)
+			{
+				$names[$val->id]=$val->name;
+			}
+		}
+
+		return $names;
+	}
+
+	public function getOpen()
+	{
+		$is_open = $this->is_open;
+		switch($is_open)
+		{
+			case 0:
+				$res = '未审核';
+				break;
+			case 1:
+				$res = '已审核';
+				break;
+			case 2:
+				$res = '退出';
+				break;
+			case 3:
+				$res = '删除';
+				break;
+			default:
+				$res = '-';
+				break;
+		}
+		return $res;
 	}
 }
