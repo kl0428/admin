@@ -23,6 +23,8 @@ if (ENVIRONMENT === 'PRODUCT') {
     defined('YII_DEBUG') or define('YII_DEBUG', true);
     defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
 }
+var_dump('ok');
+exit;
 $config = dirname(__FILE__) . '/protected/config/' . strtolower(ENVIRONMENT) . '.php';
 require_once $yii;
 $app = Yii::createWebApplication($config);
