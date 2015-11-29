@@ -1,4 +1,5 @@
 <?php
+ini_set("error_reporting","E_ALL & ~E_NOTICE");
 define('VERSION', time());
 defined('ENVIRONMENT') or define('ENVIRONMENT','PRODUCT');
 //defined('ENVIRONMENT') or define('ENVIRONMENT','TEST');
