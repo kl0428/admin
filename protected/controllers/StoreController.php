@@ -84,7 +84,8 @@ class StoreController extends BaseController
 
             }
         }
-        $this->render('create',['model'=>$model]);
+        $managers = Managers::model()->loadStaffAllModel();
+        $this->render('create',['model'=>$model,'managers'=>$managers]);
     }
 
     //图片函数
@@ -110,10 +111,6 @@ class StoreController extends BaseController
     //商贾列表
     public function actionView()
     {
-        /*var_dump($_SERVER ['HTTP_HOST']);
-        var_dump($_SERVER["ROOT_DOCUMENT"]);
-        var_dump($_SERVER['DOCUMENT_ROOT']);
-        exit;*/
         $model = new Store('search');
         $model->unsetAttributes();
         $names = Store::model()->getName();
@@ -242,11 +239,13 @@ class StoreController extends BaseController
 
                 }
             }
+            $is_manager = Yii::app()->user->getState("info")->authority>=1?1:0;
 
 
 //             var_dump($images);
 //             exit;
-            $this->render('change',['model'=>$model,'bussiness_license'=>$bussiness_license,'images'=>$images]);
+            $managers = Managers::model()->loadStaffAllModel();
+            $this->render('change',['model'=>$model,'bussiness_license'=>$bussiness_license,'images'=>$images,'managers'=>$managers,'is_manager'=>$is_manager]);
         }else{
             $this->redirect(array('/site/index'));
         }

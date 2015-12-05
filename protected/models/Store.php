@@ -38,7 +38,7 @@ class Store extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, image, address, tel, realname, identity, mobile, bussiness_license, bankcode, banktype', 'required','message'=>'此项要求必填'),
+			array('name, image, address, tel, realname, identity,manager, mobile, bussiness_license, bankcode, banktype', 'required','message'=>'此项要求必填'),
 			array('name, tel, realname, identity, mobile, bankcode, banktype', 'length', 'max'=>32),
 			array('image', 'length', 'max'=>64),
 			array('tel','match','pattern'=>'/^((\+?[0-9]{2,4}\-[0-9]{3,4}\-)|([0-9]{3,4}\-))?([0-9]{7,8})(\-[0-9]+)?$/','message'=>'输入正确的固定电话'),
@@ -74,6 +74,7 @@ class Store extends CActiveRecord
 			'image' => '店铺logo',
 			'address' => '店铺地址',
 			'tel' => '店铺固话',
+			'manager' =>'店铺管理员',
 			'realname' => '法人',
 			'identity' => '身份证',
 			'mobile' => '手机号',
@@ -122,6 +123,11 @@ class Store extends CActiveRecord
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
 		$criteria->order = 'gmt_created desc';
+		$info = Yii::app()->user->getState('info');
+		if($info->authority == 0)
+		{
+			$criteria->compare('manager',$info->id);
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -151,7 +157,12 @@ class Store extends CActiveRecord
 
 	public function getName()
 	{
-		$data = $this->findAll(array('select'=>array('id','name')));
+		$userInfo = Yii::app()->user->getState('info');
+		if($userInfo->authority == 0 && $userInfo->id){
+			$data = $this->findAll(array('select'=>array('id','name'),'condition'=>'manager=:id','params'=>array(':id'=>$userInfo->id)));
+		}else{
+			$data = $this->findAll(array('select'=>array('id','name')));
+		}
 		$names = array();
 		if($data)
 		{

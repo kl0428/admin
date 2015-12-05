@@ -43,6 +43,14 @@ $cateOptions = Helper::treeOptions($cates,$model->cate_id);*/
         </div>
 
         <div class="form-group">
+            <?php echo $form->labelEx($model,'manager',array('class'=>'col-sm-2 control-label')); ?>
+            <div class="col-sm-8">
+                <?php echo $form->dropDownList($model, 'manager',$managers,array('class'=>'select2 select-simple','empty'=>'请选择店铺管理员'));?>
+                <?php echo $form->error($model,'manager'); ?>
+            </div>
+        </div>
+
+        <div class="form-group">
             <?php echo $form->labelEx($model,'address',array('class'=>'col-sm-2 control-label')); ?>
             <div class="col-sm-8">
                 <?php echo $form->textField($model, 'address',array('class'=>'form-control'));?>

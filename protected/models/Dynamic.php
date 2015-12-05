@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "{{message}}".
+ * This is the model class for table "{{dynamic}}".
  *
- * The followings are the available columns in table '{{message}}':
- * @property integer $id
- * @property integer $flag
- * @property integer $to_user
- * @property string $content
- * @property string $is_read
+ * The followings are the available columns in table '{{dynamic}}':
+ * @property integer $dy_id
+ * @property string $dy_type
+ * @property integer $dy_user
+ * @property string $dy_content
+ * @property string $dy_images
  * @property string $gmt_created
  * @property string $gmt_modified
  */
-class Message extends CActiveRecord
+class Dynamic extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{message}}';
+		return '{{dynamic}}';
 	}
 
 	/**
@@ -30,14 +30,13 @@ class Message extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('flag, to_user, content', 'required'),
-			array('flag, to_user', 'numerical', 'integerOnly'=>true),
-			array('content', 'length', 'max'=>250),
-			array('is_read', 'length', 'max'=>1),
-			array('gmt_created, gmt_modified', 'safe'),
+			array('dy_user', 'required'),
+			array('dy_user,dy_num', 'numerical', 'integerOnly'=>true),
+			array('dy_type', 'length', 'max'=>1),
+			array('dy_content, dy_images, gmt_created, gmt_modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, flag, to_user, content, is_read, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
+			array('dy_id, dy_type, dy_user, dy_content, dy_images, gmt_created, gmt_modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,6 +48,7 @@ class Message extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+
 		);
 	}
 
@@ -58,11 +58,12 @@ class Message extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => '消息id',
-			'flag' => '消息标识',
-			'to_user' => '发送对象',
-			'content' => '发送内容',
-			'is_read' => '是否已读0-未读,1-已读',
+			'dy_id' => '动态编号',
+			'dy_type' => '动态类型 ',//0-个人 1-联盟2-店铺 3-其他
+			'dy_user' => '发表用户',
+			'dy_content' => '动态内容',
+			'dy_images' => '动态图片',
+			'dy_num'    =>'排序',
 			'gmt_created' => '创建时间',
 			'gmt_modified' => '更新时间',
 		);
@@ -86,13 +87,21 @@ class Message extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('flag',$this->flag);
-		$criteria->compare('to_user',$this->to_user);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('is_read',$this->is_read,true);
+		$criteria->compare('dy_id',$this->dy_id);
+		$criteria->compare('dy_content',$this->dy_content,true);
+		$criteria->compare('dy_images',$this->dy_images,true);
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
+		$criteria->compare('dy_user',$this->dy_user);
+		$criteria->order = 'gmt_created desc';
+		$info = Yii::app()->user->getState('info');
+		if($info->authority == 0)
+		{
+			$criteria->addCondition('dy_type=4');
+			if($store_ids = Yii::app()->user->getState("store_ids")){
+				$criteria->addInCondition('dy_user',$store_ids);
+			}
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -103,7 +112,7 @@ class Message extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Message the static model class
+	 * @return Dynamic the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -120,5 +129,20 @@ class Message extends CActiveRecord
 		return true;
 	}
 
+	public function getStore($id = 0)
+	{
+		if(!$id){
+			$id = $this->dy_user;
+		}
+		if($id && $this->dy_type == 2){
+			$obj = Store::model()->findByPk($id);
+			if($obj)
+			{
+				return $obj->name;
+			}
+		}
+
+
+	}
 
 }
