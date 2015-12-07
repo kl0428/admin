@@ -26,6 +26,8 @@ if (ENVIRONMENT === 'PRODUCT') {
 }
 $config = dirname(__FILE__) . '/protected/config/' . strtolower(ENVIRONMENT) . '.php';
 require_once $yii;
+echo phpinfo();
+exit;
 $app = Yii::createWebApplication($config);
 // $app->attachBehavior('app', 'application.behaviors.CgtzBehavior');
 $app->run();
