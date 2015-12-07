@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'优时',
+    'name'=>'草根',
     //'defaultController'=>'index',
     'theme' => 'classic',
 
@@ -49,7 +49,7 @@ return array(
             'showScriptName' => false,
             'urlSuffix'=>'.html',
             'rules'=>array(
-               // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+                // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ),
@@ -79,7 +79,7 @@ return array(
                 array(
                     'host' => '127.0.0.1',
                     'port' => 6379,
-                    'password' => '123456',
+                    // 'password' => '123456',
                 ),
             ),
         ),
@@ -96,6 +96,11 @@ return array(
                     'class'=>'CFileLogRoute',
                     'levels'=>'error, warning',
                 ),
+                /* array(
+                        'class'=>'CWebLogRoute',//这表示把日志显示在网页下方，下方有详细的
+                        'levels'=>'trace, info, error, warning',
+                        'categories'=>'test.*,system.db.*',
+                    ),*/
                 // uncomment the following to show log messages on web pages
                 /*
                 array(
@@ -159,3 +164,4 @@ return array(
         ),
     ),
 );
+
