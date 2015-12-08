@@ -7,6 +7,27 @@
  */
 class DynamicController extends BaseController
 {
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules()
+    {
+        return array(
+            array('allow', // @代表有角色的
+                'actions'=>array('index','change','view','create'),
+                'users'=>array('@'),
+            ),
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions'=>array('delete'),
+                'expression'=>'$user->getState("info")->authority >= 1',//,array($this,"isSuperUser"),
+            ),
+            array('deny',  // *代表所有的用户
+                'users'=>array('*'),
+            ),
+        );
+    }
     public function actionCreate()
     {
         $model = new Dynamic();

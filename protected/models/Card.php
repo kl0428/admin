@@ -34,7 +34,8 @@ class Card extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('card_type, card_num, start_time, end_time, total_num, used_num, price, is_sale, type_id', 'required'),
+			array('card_num, start_time, end_time, total_num, price , type_id', 'required'),
+			array('card_num','unique','className'=>'Card','attributeName'=>'card_num'),
 			array('total_num, used_num, type_id', 'numerical', 'integerOnly'=>true),
 			array('price', 'numerical'),
 			array('card_type', 'length', 'max'=>8),
@@ -54,6 +55,7 @@ class Card extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'type'=>array(self::BELONGS_TO,'CardType','type_id'),
 		);
 	}
 
@@ -73,7 +75,7 @@ class Card extends CActiveRecord
 			'used_num' => '已用次数',
 			'price' => '价值',
 			'is_sale' => '是否卖出',//0-未1-已
-			'type_id' => '通卡类型id',
+			'type_id' => '通卡类型',
 		);
 	}
 
@@ -106,6 +108,8 @@ class Card extends CActiveRecord
 		$criteria->compare('price',$this->price);
 		$criteria->compare('is_sale',$this->is_sale,true);
 		$criteria->compare('type_id',$this->type_id);
+		$criteria->with = array('type');
+		$criteria->order = 'card_id desc';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -88,7 +88,7 @@ class CardType extends CActiveRecord
 		$criteria->compare('type_id',$this->type_id);
 		$criteria->compare('type_name',$this->type_name,true);
 		$criteria->compare('type_style',$this->type_style,true);
-		$criteria->compare('type_mark',$this->type_mark,true);
+		//$criteria->compare('type_mark',$this->type_mark,true);
 		$criteria->compare('type_num',$this->type_num);
 		$criteria->compare('type_desc',$this->type_desc,true);
 
@@ -106,5 +106,19 @@ class CardType extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getType()
+	{
+		$data = $this->findAll(array('select'=>array('type_id','type_name')));
+		$res_arr = array();
+		if($data){
+			foreach($data as $key=>$val)
+			{
+				$res_arr[$val->type_id] = $val->type_name;
+			}
+		}
+		return $res_arr;
+
 	}
 }

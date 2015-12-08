@@ -11,22 +11,26 @@
                          $info = Yii::app()->user->getState('info');
 	            ?>
                 <ul class="cl-vnavigation">
-
-                        <li><a href="<?=$this->getController()->createUrl('table/index')?>"><i class="fa fa-home"></i><span>建表</span></a>
-                            <!--<ul class="sub-menu">
-                                <li class="<?php /*echo ($tmp=='useradvise/index')?'active':'';*/?>">
-                                    <?php /*echo CHtml::link("建表",array("/userAdvise/index"));*/?>
+                    <?php if($info->authority >= 1):?>
+                        <li><a href="#"><i class="fa fa-home"></i><span>卡管理</span></a>
+                            <ul class="sub-menu">
+                                <li class="<?php echo ($tmp=='card/card')?'active':'';?>">
+                                    <?php echo CHtml::link("卡列表",array("/card/card"));?>
                                 </li>
-                            </ul>-->
+                                <li class="<?php echo ($tmp=='card/cardType')?'active':'';?>">
+                                    <?php echo CHtml::link("卡类型",array("/card/cardType"));?>
+                                </li>
+                            </ul>
                         </li>
-                        <li><a href="<?=$this->getController()->createUrl('assess/index')?>"><i class="fa fa-home"></i><span>自评</span></a>
+                    <?php endif;?>
+                        <li><a href="#"><i class="fa fa-home"></i><span>消费统计</span></a>
                             <!--<ul class="sub-menu">
                                 <li class="<?php /*echo ($tmp=='useradvise/index')?'active':'';*/?>">
                                     <?php /*echo CHtml::link("客户反馈意见",array("/userAdvise/index"));*/?>
                                 </li>
                             </ul>-->
                         </li>
-                        <li><a href="#"><i class="fa fa-home"></i><span>会签</span></a>
+                        <li><a href="#"><i class="fa fa-home"></i><span>信息反馈</span></a>
                            <!-- <ul class="sub-menu">
                                 <li class="<?php /*echo ($tmp=='useradvise/index')?'active':'';*/?>">
                                     <?php /*echo CHtml::link("客户反馈意见",array("/userAdvise/index"));*/?>
@@ -39,10 +43,6 @@
                             <ul class="sub-menu">
                                 <li class="<?php echo $tmp=='stroe/view'?'active':'';?>"><?php echo CHtml::link("商铺列表",array("/store/view"));?></li>
                                 <li class="<?php echo $tmp=='course/index'?'active':'';?>"><?php echo CHtml::link("课程列表",array("/course/index"));?></li>
-                                <li class="<?php echo $conName=='operatechannel'?'active':'';?>"><?php echo CHtml::link("推广渠道",array("/OperateChannel/index"));?></li>
-                                <li class="<?php echo $conName=='coupontemplate'?'active':'';?>"><?php echo CHtml::link("投资券模板",array("/couponTemplate/index"));?></li>
-                                <li class="<?php echo $conName=='yearcoupon'?'active':'';?>"><?php echo CHtml::link("年化券",array("/yearCoupon/index"));?></li>
-                                <li class="<?php echo $conName=='newredpacket'?'active':'';?>"><?php echo CHtml::link("新红包模板",array("/NewRedPacket/index"));?></li>
                             </ul>
                         </li>
 
@@ -52,10 +52,6 @@
                                 <ul class="sub-menu">
                                     <li class="<?php echo $tmp=='user/index'?'active':'';?>"><?php echo CHtml::link("用户管理",array("/user/index"));?></li>
                                     <li class="<?php echo $tmp=='report/index'?'active':'';?>"><?php echo CHtml::link("举报反馈",array("/report/index"));?></li>
-                                    <li class="<?php echo $tmp=='stroe/view'?'active':'';?>"><?php echo CHtml::link("商铺列表",array("/store/view"));?></li>
-                                    <li class="<?php echo $tmp=='coupontemplate'?'active':'';?>"><?php echo CHtml::link("投资券模板",array("/couponTemplate/index"));?></li>
-                                    <li class="<?php echo $tmp=='yearcoupon'?'active':'';?>"><?php echo CHtml::link("年化券",array("/yearCoupon/index"));?></li>
-                                    <li class="<?php echo $tmp=='newredpacket'?'active':'';?>"><?php echo CHtml::link("新红包模板",array("/NewRedPacket/index"));?></li>
                                 </ul>
                             </li>
                             <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>
