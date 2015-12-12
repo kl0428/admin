@@ -20,6 +20,7 @@ class SiteController extends BaseController
 			),
 		);
 	}
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -45,6 +46,7 @@ class SiteController extends BaseController
 			),
 		);
 	}
+	
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -112,7 +114,11 @@ class SiteController extends BaseController
 	 */
 	public function actionLogout()
 	{
-		Yii::app()->user->logout();
+		/*Yii::app()->user->logout();
+		$this->redirect(Yii::app()->user->loginUrl);*/
+		Yii::app()->user->logout(true);
+		Yii::app()->session->clear();
+		Yii::app()->session->destroy();
 		$this->redirect(Yii::app()->user->loginUrl);
 	}
 }

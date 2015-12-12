@@ -131,9 +131,9 @@ class UEditor extends CInputWidget
         'imageleft' => '左浮动', 'imageright' => '右浮动', 'attachment' => '附件', 'imagecenter' => '居中', 'wordimage' => '图片转存',
         'lineheight' => '行间距', 'customstyle' => '自定义标题', 'autotypeset' => '自动排版', 'webapp' => '百度应用'
     );
-    private $defaultiframeCss = 'themes/default/iframe.css';
-    public $JsFile = 'ueditor.all.min.js';
-    public $CssFile = 'themes/default/ueditor.css';
+    private $defaultiframeCss = '../ueditor/themes/iframe.css';
+    public $JsFile = '../ueditor/ueditor.all.min.js';
+    public $CssFile = '../ueditor/themes/default/css/ueditor.css';
     public $UEDITOR_CONFIG = array();
 
     public function init()
@@ -174,6 +174,10 @@ class UEditor extends CInputWidget
                 $this->UEDITOR_CONFIG[$key] = $this->UEDITOR_CONFIG['UEDITOR_HOME_URL'] . $value;
             }
         }
+//        $this->UEDITOR_CONFIG['catcherUrl'] = Yii::app()->createUrl('api/uploadfiles');
+//        $this->UEDITOR_CONFIG['catcherPath'] = Yii::app()->params['imageUrl'];
+//        $this->UEDITOR_CONFIG['imageUrl'] = Yii::app()->createUrl('api/uploadfiles');
+//        $this->UEDITOR_CONFIG['imagePath'] = Yii::app()->params['imageUrl'];
         $this->UEDITOR_CONFIG['catcherUrl'] = Yii::app()->createUrl('api/uploadfiles');
         $this->UEDITOR_CONFIG['catcherPath'] = Yii::app()->params['UpYun']['visitUrl'];
         $this->UEDITOR_CONFIG['imageUrl'] = Yii::app()->createUrl('api/uploadfiles');
@@ -223,6 +227,7 @@ class UEditor extends CInputWidget
         {
             $content = $htmlOptions['value'];
         }
+
         echo CHtml::tag('script', $htmlOptions, $content);
     }
 

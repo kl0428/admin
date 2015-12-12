@@ -29,8 +29,19 @@ class UserIdentity extends CUserIdentity
 				$this->errorCode = self::ERROR_NONE;
 				$token = md5($result->id.$this->password);
 				//Yii::app()->cache_redis->set($result->id.'.UserToken',$token);
+				$store = Store::model()->findAll('manager=:id',array(':id'=>$result->id));
+				$store_ids = array();
+				if($store)
+				{
+					foreach($store as $key=>$val)
+					{
+						$store_ids[] = $val->id;
+					}
+				}
 				Yii::app()->user->setState('token',$token);
 				Yii::app()->user->setState('info',$result);
+				Yii::app()->user->setState('store',$store);
+				Yii::app()->user->setState('store_ids',$store_ids);
 			}else{
 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 			}

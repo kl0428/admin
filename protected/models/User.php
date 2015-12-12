@@ -35,7 +35,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nickname, password', 'required'),
+			array('nickname, password', 'required','on'=>'create'),
 			array('sex', 'numerical', 'integerOnly'=>true),
 			array('nickname, username, email, password', 'length', 'max'=>32),
 			array('mobile', 'length', 'max'=>11),
@@ -56,6 +56,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'cityInfo'=>array(self::BELONGS_TO,'YhmCity','city'),
 		);
 	}
 
@@ -111,6 +112,8 @@ class User extends CActiveRecord
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
 		$criteria->compare('password',$this->password,true);
 
+		$criteria->with = 'cityInfo';
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -126,4 +129,28 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function loadStaffAllModel()
+	{
+		$res = array();
+		$time = array();
+		//$city = array();
+		$mobile = array();
+
+			$model = (array)$this->with('cityInfo')->findAll(array('order'=>'convert(nickname USING gbk) COLLATE gbk_chinese_ci asc'));
+
+
+		if($model){
+			foreach($model as $key=>$value)
+			{
+				$res[$value->id] = $value->nickname;
+				//$city[$value->city] = $value->city->class_name;
+				$time[date('Y-m-d H:i:s',strtotime($value->gmt_created))] = date('Y-m-d H:i:s',strtotime($value->gmt_created));
+				$mobile[$value->mobile] = $value->mobile;
+			}
+		}
+		$result = array($res,$time,$mobile);
+		return $result;
+	}
+
 }

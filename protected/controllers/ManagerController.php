@@ -33,11 +33,11 @@ class ManagerController extends BaseController
         {
             return array(
                 array('allow', // @代表有角色的
-                    'actions'=>array('index','change'),
+                    'actions'=>array('index','change','quit'),
                     'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                    'actions'=>array('create','update','quit'),
+                    'actions'=>array('create','create','update','delete'),
                     'expression'=>'$user->getState("info")->authority >= 1',//,array($this,"isSuperUser"),
                 ),
                 array('deny',  // *代表所有的用户
