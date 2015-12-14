@@ -24,18 +24,21 @@
                         </li>
                     <?php endif;?>
                         <li><a href="#"><i class="fa fa-home"></i><span>消费统计</span></a>
-                            <!--<ul class="sub-menu">
-                                <li class="<?php /*echo ($tmp=='useradvise/index')?'active':'';*/?>">
-                                    <?php /*echo CHtml::link("客户反馈意见",array("/userAdvise/index"));*/?>
+                            <ul class="sub-menu">
+                                <?php if($info->authority >= 1):?>
+                                <li class="<?php echo ($tmp=='order/index')?'active':'';?>">
+                                    <?php echo CHtml::link("订单",array("/order/index"));?>
                                 </li>
-                            </ul>-->
+                                <?php endif;?>
+                                <li class="<?php echo ($tmp=='order/index')?'active':'';?>">
+                                    <?php echo CHtml::link("订单",array("/order/index"));?>
+                                </li>
+                            </ul>
                         </li>
                         <li><a href="#"><i class="fa fa-home"></i><span>信息反馈</span></a>
-                           <!-- <ul class="sub-menu">
-                                <li class="<?php /*echo ($tmp=='useradvise/index')?'active':'';*/?>">
-                                    <?php /*echo CHtml::link("客户反馈意见",array("/userAdvise/index"));*/?>
-                                </li>
-                            </ul>-->
+                            <ul class="sub-menu">
+                                <li class="<?php echo $tmp=='report/index'?'active':'';?>"><?php echo CHtml::link("举报反馈",array("/report/index"));?></li>
+                            </ul>
                         </li>
 
 

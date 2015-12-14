@@ -48,4 +48,17 @@ class ApiController extends BaseController
         echo CJSON::encode($data);
         Yii::app()->end();
     }
+
+    public function actionGetCardInfo()
+    {
+        if(Yii::app()->request->isAjaxRequest()){
+            $card_num = $this->_post('num');
+            if($card_num){
+                $obj = Order::model()->find(array('condition'=>'flag_content=:content','params'=>array(':content'=>$card_num)));
+                if($obj){
+
+                }
+            }
+        }
+    }
 }
