@@ -30,8 +30,11 @@
                                     <?php echo CHtml::link("订单",array("/order/index"));?>
                                 </li>
                                 <?php endif;?>
-                                <li class="<?php echo ($tmp=='order/index')?'active':'';?>">
-                                    <?php echo CHtml::link("订单",array("/order/index"));?>
+                                <li class="<?php echo ($tmp=='consumerLog/index')?'active':'';?>">
+                                    <?php echo CHtml::link("消费",array("/consumerLog/index"));?>
+                                </li>
+                                <li class="<?php echo ($tmp=='consumerLog/create')?'active':'';?>">
+                                    <?php echo CHtml::link("验证",array("/consumerLog/create"));?>
                                 </li>
                             </ul>
                         </li>

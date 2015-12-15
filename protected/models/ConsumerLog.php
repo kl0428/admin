@@ -201,21 +201,22 @@ class ConsumerLog extends CActiveRecord
 		return $res;
 	}
 
-	public function getAmount(){
+	public function getAmount($params =array()){
+		extract($params);
 		$select="select sum(fee) as total from `t_consumer_log`";
 
 		$condition = 'where 1=1';
-		if($this->store_id)
+		if(isset($store_id)&&$store_id)
 			$condition .= ' and store_id='.$this->store_id;
-		if($this->flag)
-			$condition .= ' and flag='.$this->flag;
+		if(isset($flag))
+			$condition .= ' and flag='.$flag;
 
-		if($this->is_used)
-			$condition .= ' and paid='.$this->is_used;
-		if($this->time_start)
-			$condition .='gmt_created >'.$this->time_start." 00:00:00";
-		if($this->time_end)
-			$condition .='gmt_created<'.$this->time_end." 23:59:59";
+		if(isset($is_used))
+			$condition .= ' and paid='.$is_used;
+		if(isset($time_start)&&$time_start)
+			$condition .=' and gmt_created > "'.date('Y-m-d',strtotime($time_start)).'00:00:00"';
+		if(isset($time_end)&&$time_end)
+			$condition .=' and gmt_created < "'.date('Y-m-d',strtotime($time_end)).' 23:59:59"';
 		$sql = $select.$condition;
 		$result = Yii::app()->db->createCommand($sql);
 		$res = $result->queryAll();

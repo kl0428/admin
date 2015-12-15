@@ -128,7 +128,13 @@
     <?php if($amount):?>
         <div class="content">
             <table class="table table-bordered">
-                <span>统计金额:</span><span style="color: #408140"><?php echo $amount['total'];?></span>
+                <span>统计金额:</span><span style="color: #408140"><?php echo $amount['total']?$amount['total']:0;?></span>
+            </table>
+        </div>
+    <?php else:?>
+        <div class="content">
+            <table class="table table-bordered">
+                <span>统计金额:</span><span style="color: #408140">0</span>
             </table>
         </div>
     <?php endif;?>

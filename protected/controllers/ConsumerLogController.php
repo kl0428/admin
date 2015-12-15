@@ -31,16 +31,17 @@ class ConsumerLogController extends BaseController
     {
         $model = new ConsumerLog('search');
         $model->unsetAttributes();
-
+        $amount = ConsumerLog::model()->getAmount();
         if($_GET['ConsumerLog']){
             $model->attributes = $_GET['ConsumerLog'];
-           /* var_dump($_GET);
+            /* var_dump($_GET);
             exit;*/
+            $amount = ConsumerLog::model()->getAmount($_GET['ConsumerLog']);
         }
 
 
         $names = Store::model()->getName();
-        $amount = ConsumerLog::model()->getAmount();
+
 
         $this->render('index',['model'=>$model,'names'=>$names,'amount'=>$amount]);
     }
