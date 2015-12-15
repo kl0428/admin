@@ -4,13 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/protected/models/Order.php" line="191" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e02654fa-2fc6-4d24-b5de-d959903ad85e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/ConsumerLog.php" afterPath="$PROJECT_DIR$/protected/models/ConsumerLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ConsumerLogController.php" afterPath="$PROJECT_DIR$/protected/controllers/ConsumerLogController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/consumerLog/index.php" afterPath="$PROJECT_DIR$/protected/views/consumerLog/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/views/slide_menu.php" afterPath="$PROJECT_DIR$/protected/components/views/slide_menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e02654fa-2fc6-4d24-b5de-d959903ad85e" name="Default" comment="" />
     <ignored path="admin.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
