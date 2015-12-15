@@ -58,7 +58,7 @@ $cateOptions = Helper::treeOptions($cates,$model->cate_id);*/
                 <div class="form-group">
                     <label class="col-sm-2 control-label">介绍图片<?=$key?></label>
                     <div class="col-sm-6">
-                        <?php echo CHtml::image(Yii::app()->baseUrl . '/upload/' . $val, '图集', array('width' => 50, 'height' => 50)); ?>
+                        <?php echo CHtml::image($val, '图集', array('width' => 50, 'height' => 50)); ?>
                         <input id="fileImage" type="file" size="30" name="upImage"/>
                     </div>
                 </div>

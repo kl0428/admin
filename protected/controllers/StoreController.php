@@ -5,6 +5,21 @@
  * Date: 15-11-25
  * Time: 下午2:15
  */
+Yii::import("application.extensions.Qiniu.*");
+use application\extensions\Qiniu\Auth;
+use application\extensions\Qiniu\Storage\UploadManager;
+function classLoader($class)
+{
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+    $file = __DIR__ . '/../extensions/' . $path . '.php';
+
+    if (file_exists($file)) {
+        require_once $file;
+    }
+}
+spl_autoload_register('classLoader');
+
+require_once  __DIR__ . '/../extensions/Qiniu/functions.php';
 class StoreController extends BaseController
 {
    // public $layout='//layouts/column2';
@@ -36,11 +51,18 @@ class StoreController extends BaseController
         $model = new Store();
         if($_POST['Store'])
         {
+            $accessKey = Yii::app()->params['qiniu']['accessKey'];
+            $secretKey = Yii::app()->params['qiniu']['secretKey'];
+            $auth = new Auth($accessKey, $secretKey);
+
+            $bucket = 'urtime1';
+            $token = $auth->uploadToken($bucket);
+            $uploadMgr = new UploadManager();
             //上传logo
             if($_FILES['image']['name']!=null)
             {
                 $images = array($_FILES['image']);
-                $images = $this->setImageInformation($images);
+                $images = $this->setImageInformation($images, $token, $uploadMgr);
                 if($images)
                 {
                     $_POST['Store']['image'] =  $images[0];
@@ -52,7 +74,7 @@ class StoreController extends BaseController
             if($_FILES['bussiness_license1']['name']!=null ||$_FILES['bussiness_license2']['name']!=null)
             {
                 $images = array($_FILES['bussiness_license1'],$_FILES['bussiness_license2']);
-                $images = $this->setImageInformation($images);
+                $images = $this->setImageInformation($images, $token, $uploadMgr);
                 if($images)
                 {
                    // $images_str = implode(',',$images);
@@ -65,7 +87,7 @@ class StoreController extends BaseController
             //上传介绍图片
             if($_FILES['upImage']['name']!=null)
             {
-                $images = $this->setImageInformation($_FILES);
+                $images = $this->setImageInformation($_FILES, $token, $uploadMgr);
                 if($images)
                 {
                     //$images_str = implode(',',$images);
@@ -89,22 +111,22 @@ class StoreController extends BaseController
     }
 
     //图片函数
-    public function setImageInformation($image){
+    public function setImageInformation($image,$token,$uploadMgr){
         $images = array();
         foreach($image as $file){
-            if($file['tmp_name']){
-                $name=$file['name'];
-                $arr=explode('.',$name);
-                $ext=$arr[count($arr)-1];
-                //$root = Yii::app()->basePath.'/../../upload/';//"..".Yii::app()->request->baseUrl;//echo dirname(__FILE__)
-                $root=Yii::app()->basePath.'/../../urtime/upload/';
-                $root2 = Yii::app()->basePath.'/../upload/';
-                $path="admin".date("YmdHis").mt_rand(1,9999).".".$ext;
-                copy($file['tmp_name'],$root2.$path);
-                move_uploaded_file($file['tmp_name'],$root.$path);
-                $images [] = $path;
+            $name=$file['name'];
+            $arr=explode('.',$name);
+            $ext=$arr[count($arr)-1];
+            $key="urtime".date("YmdHis").mt_rand(1,9999).".".$ext;
+            $filePath = $file['tmp_name'];
+            list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+            if ($err !== null) {
+                $images ['err'][] = $err;
+            } else {
+                $images[] = $ret['key'];
             }
-         }
+
+        }
         return $images;
     }
 
@@ -134,7 +156,13 @@ class StoreController extends BaseController
 
             if($model->images_str)
             {
-                $images = json_decode($model->images_str);
+                $image = json_decode($model->images_str);
+                if($image){
+                    foreach($image as $key=>$val)
+                    {
+                        $images[] = Yii::app()->params['qiniu']['host'].$val;
+                    }
+                }
             }
            /* var_dump($bussiness_license);
             exit;*/
@@ -152,6 +180,14 @@ class StoreController extends BaseController
 
         if($id)
         {
+            $accessKey = Yii::app()->params['qiniu']['accessKey'];
+            $secretKey = Yii::app()->params['qiniu']['secretKey'];
+            $auth = new Auth($accessKey, $secretKey);
+
+            $bucket = 'urtime1';
+            $token = $auth->uploadToken($bucket);
+            $uploadMgr = new UploadManager();
+
             $model = Store::model()->findByPk($id);
             $bussiness_license = array();
             $images = array();
@@ -161,7 +197,13 @@ class StoreController extends BaseController
 
             if($model->images_str)
             {
-                $images = json_decode($model->images_str);
+                $image = json_decode($model->images_str);
+                if($image){
+                    foreach($image as $key=>$val)
+                    {
+                        $images = Yii::app()->params['qiniu']['host'].$val;
+                    }
+                }
             }
 
             if($_POST['Store'])
@@ -170,7 +212,7 @@ class StoreController extends BaseController
                 if($_FILES['image']['name']!=null)
                 {
                     $images = array($_FILES['image']);
-                    $images = $this->setImageInformation($images);
+                    $images = $this->setImageInformation($images, $token, $uploadMgr);
                     if($images)
                     {
                         $_POST['Store']['image'] =  $images[0];
@@ -187,18 +229,18 @@ class StoreController extends BaseController
                         if ($_FILES['bussiness_license1']['name'] != null || $_FILES['bussiness_license2']['name'] == null) {
                             $bussiness = json_decode($model->bussiness_license);
                             $images = array($_FILES['bussiness_license1']);
-                            $images = $this->setImageInformation($images);
+                            $images = $this->setImageInformation($images, $token, $uploadMgr);
                             $bussiness[0] = $images[0];
                             $_POST['Store']['bussiness_license'] = json_encode($bussiness);//$images_str;
                         } else if ($_FILES['bussiness_license1']['name'] == null || $_FILES['bussiness_license2']['name'] != null) {
                             $bussiness = json_decode($model->bussiness_license);
                             $images = array($_FILES['bussiness_license2']);
-                            $images = $this->setImageInformation($images);
+                            $images = $this->setImageInformation($images, $token, $uploadMgr);
                             $bussiness[1] = $images[0];
                             $_POST['Store']['bussiness_license'] = json_encode($bussiness);//$images_str;
                         } else {
                             $images = array($_FILES['bussiness_license1'], $_FILES['bussiness_license2']);
-                            $images = $this->setImageInformation($images);
+                            $images = $this->setImageInformation($images, $token, $uploadMgr);
                             if ($images) {
                                 // $images_str = implode(',',$images);
                                 $_POST['Store']['bussiness_license'] = json_encode($images);//$images_str;
@@ -206,7 +248,7 @@ class StoreController extends BaseController
                         }
                     }else{
                         $images = array($_FILES['bussiness_license1'], $_FILES['bussiness_license2']);
-                        $images = $this->setImageInformation($images);
+                        $images = $this->setImageInformation($images, $token, $uploadMgr);
                         if ($images) {
                             // $images_str = implode(',',$images);
                             $_POST['Store']['bussiness_license'] = json_encode($images);//$images_str;
@@ -222,7 +264,7 @@ class StoreController extends BaseController
                 //上传介绍图片
                 if($_FILES['upImage']['name']!=null)
                 {
-                    $images = $this->setImageInformation($_FILES);
+                    $images = $this->setImageInformation($images, $token, $uploadMgr);
                     if($images)
                     {
                         //$images_str = implode(',',$images);

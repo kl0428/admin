@@ -71,7 +71,7 @@
                     array('name'=>'name','header'=>'店铺','value'=>'$data->name'),
                     array('name'=>'image',
                         'header'=>'logo',
-                        'value'=>'CHtml::image(Yii::app()->baseUrl."/upload/".$data->image,"logo",array("width"=>"50","height"=>"50"))',
+                        'value'=>'CHtml::image(Yii::app()->params["qiniu"]["host"].$data->image,"logo",array("width"=>"50","height"=>"50"))',
                         'type'=>'raw',   //这里是原型输出
                         'htmlOptions'=>array(
                             'width'=>'50',

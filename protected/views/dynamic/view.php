@@ -34,7 +34,7 @@
                         <h4>图<?php echo $key + 1; ?></h4>
 
                         <p>
-                            <?php echo $images ? CHtml::image(Yii::app()->baseUrl . '/upload/' . $val, '动态图集', array('width' => 300, 'height' => 300)) : '无' ?>
+                            <?php echo $images ? CHtml::image($val, '动态图集', array('width' => 300, 'height' => 300)) : '无' ?>
                         </p>
                     </div>
                 <?php endforeach; ?>

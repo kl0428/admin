@@ -133,6 +133,11 @@ return array(
             1=>array('key'=>1,'name'=>'通卡'),
         ),
         'imageUrl'=>'http://admin.cgtz.com',
+        'qiniu'=>array(
+            'accessKey'=>'xDEAAZipfS863nRtNUj8NhKvij4rSuhDcWZ-WZcV',
+            'secretKey'=>'f1KfH4sq04OgAfJV8up4NrRN-zaejZeN15S-TSK8',
+            'host'=>'http://7xp01t.com2.z0.glb.qiniucdn.com/',
+        ),
         'UpYun' => array(
             'visitUrl' => 'https://cgtzimage.b0.upaiyun.com',//images
             'httpImgUrl' => 'http://cgtzimage.b0.upaiyun.com',//images

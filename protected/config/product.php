@@ -132,17 +132,10 @@ return array(
             0=>array('key'=>0,'name'=>'体验通卡'),
             1=>array('key'=>1,'name'=>'通卡'),
         ),
-        'imageUrl'=>'http://admin.cgtz.com',
-        'UpYun' => array(
-            'visitUrl' => 'https://cgtzimage.b0.upaiyun.com',//images
-            'httpImgUrl' => 'http://cgtzimage.b0.upaiyun.com',//images
-            'cutUrl' => 'http://v0.api.upyun.com',
-            'bucketname' => 'cgtzimage',
-            'username' => 'caogen',
-            'password' => 'caogen123',
-            'bucket_file_name' => 'cgtzfiles',
-            'attachUrl' => 'http://cgtzfiles.b0.upaiyun.com',//files
-            'projectsUrl' => 'https://cgtzimage.b0.upaiyun.com/projectTests/',//images
+        'qiniu'=>array(
+            'accessKey'=>'xDEAAZipfS863nRtNUj8NhKvij4rSuhDcWZ-WZcV',
+            'secretKey'=>'f1KfH4sq04OgAfJV8up4NrRN-zaejZeN15S-TSK8',
+            'host'=>'http://7xp01t.com2.z0.glb.qiniucdn.com/',
         ),
         'banklist' => array(
             'CMB' => '招商银行',

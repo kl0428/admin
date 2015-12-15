@@ -49,6 +49,7 @@
                             <ul class="sub-menu">
                                 <li class="<?php echo $tmp=='stroe/view'?'active':'';?>"><?php echo CHtml::link("商铺列表",array("/store/view"));?></li>
                                 <li class="<?php echo $tmp=='course/index'?'active':'';?>"><?php echo CHtml::link("课程列表",array("/course/index"));?></li>
+                                <li class="<?php echo $tmp=='dynamic/index'?'active':'';?>"><?php echo CHtml::link("店铺动态",array("/dynamic/index"));?></li>
                             </ul>
                         </li>
 
