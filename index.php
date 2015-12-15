@@ -1,9 +1,9 @@
 <?php
 ini_set("error_reporting","E_ALL & ~E_NOTICE");
 define('VERSION', time());
-defined('ENVIRONMENT') or define('ENVIRONMENT','PRODUCT');
+//defined('ENVIRONMENT') or define('ENVIRONMENT','PRODUCT');
 //defined('ENVIRONMENT') or define('ENVIRONMENT','TEST');
-//defined('ENVIRONMENT') or define('ENVIRONMENT', 'DEVELOP');
+defined('ENVIRONMENT') or define('ENVIRONMENT', 'DEVELOP');
 //develop 开发  test测试  product线上
 if (ENVIRONMENT === 'DEVELOP') {
     $yii = dirname(__FILE__) . '/library/yiiframework/yii.php';
