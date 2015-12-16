@@ -58,7 +58,7 @@
                             <li><a href="#"><i class="fa fa-smile-o"></i><span>应用管理</span></a>
                                 <ul class="sub-menu">
                                     <li class="<?php echo $tmp=='user/index'?'active':'';?>"><?php echo CHtml::link("用户管理",array("/user/index"));?></li>
-                                    <li class="<?php echo $tmp=='report/index'?'active':'';?>"><?php echo CHtml::link("举报反馈",array("/report/index"));?></li>
+                                    <li class="<?php echo $tmp=='message/index'?'active':'';?>"><?php echo CHtml::link("消息信息",array("/message/index"));?></li>
                                 </ul>
                             </li>
                             <li><a href="#"><i class="fa fa-list-alt"></i><span>管理</span></a>

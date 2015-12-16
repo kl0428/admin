@@ -30,7 +30,7 @@ class Message extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('flag, to_user, content', 'required'),
+			array('flag, content', 'required'),
 			array('flag, to_user', 'numerical', 'integerOnly'=>true),
 			array('content', 'length', 'max'=>250),
 			array('is_read', 'length', 'max'=>1),
@@ -62,7 +62,7 @@ class Message extends CActiveRecord
 			'flag' => '消息标识',
 			'to_user' => '发送对象',
 			'content' => '发送内容',
-			'is_read' => '是否已读0-未读,1-已读',
+			'is_read' => '是否已读',//0-未读,1-已读
 			'gmt_created' => '创建时间',
 			'gmt_modified' => '更新时间',
 		);
@@ -90,7 +90,7 @@ class Message extends CActiveRecord
 		$criteria->compare('flag',$this->flag);
 		$criteria->compare('to_user',$this->to_user);
 		$criteria->compare('content',$this->content,true);
-		$criteria->compare('is_read',$this->is_read,true);
+		//$criteria->compare('is_read',$this->is_read,true);
 		$criteria->compare('gmt_created',$this->gmt_created,true);
 		$criteria->compare('gmt_modified',$this->gmt_modified,true);
 
@@ -119,6 +119,28 @@ class Message extends CActiveRecord
 		$this->gmt_modified = date('Y-m-d H:i:s');
 		return true;
 	}
+
+	public function flag()
+	{
+		$flag = $this->flag;
+		switch($flag)
+		{
+			case 0:
+				$res = '所有';
+				break;
+			case 1:
+				$res = '店铺';
+				break;
+			case 2:
+				$res = '用户';
+				break;
+			default:
+				$res = '用户';
+				break;
+		}
+		return $res;
+	}
+
 
 
 }
