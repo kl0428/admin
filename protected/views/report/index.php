@@ -15,10 +15,10 @@
  */
 ?>
 <div class="page-head">
-    <h2>用户管理</h2>
+    <h2>反馈管理</h2>
     <ol class="breadcrumb">
         <li><a href="/">控制面板</a></li>
-        <li><a href="/report/index">用户管理</a></li>
+        <li><a href="/report/index">反馈管理</a></li>
         <li class="active">详情</li>
     </ol>
 </div>

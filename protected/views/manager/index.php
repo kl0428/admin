@@ -7,7 +7,7 @@
  */
 ?>
 <div class="page-head">
-    <h2>员工管理</h2>
+    <h2>人员管理</h2>
     <ol class="breadcrumb">
         <li><a href="/">控制面板</a></li>
         <li><a href="/manager/index">人员管理</a></li>
