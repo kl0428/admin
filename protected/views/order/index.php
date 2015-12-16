@@ -7,7 +7,7 @@
  */
 ?>
 <div class="page-head">
-    <h2>管理</h2>
+    <h2>订单管理</h2>
     <ol class="breadcrumb">
         <li><a href="/">控制面板</a></li>
         <li><a href="/report/index">订单管理</a></li>
