@@ -19,7 +19,7 @@
 	<div class="middle-login">
 		<div class="block-flat">
 			<div class="header">							
-				<h3 class="text-center"><img class="logo-img" src="<?php echo $this->themePath;?>images/logo.png" alt="logo"/>草根投资管理系统</h3>
+				<h3 class="text-center"><img class="logo-img" src="<?php echo $this->themePath;?>images/logo.png" alt="logo"/>优时管理系统</h3>
 			</div>
 			<div>
 				<?php $form=$this->beginWidget('CActiveForm', array(
